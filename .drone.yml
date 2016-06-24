@@ -1,12 +1,12 @@
 image: node:5.0.0-slim
 git:
-  path: github.com/vjscjp/voteui24
+  path: github.com/vjscjp304/voteui24
 script:
   - echo "build commands"
   - echo "no build command"
   - echo "no test command"
 clone:
-  path: github.com/vjscjp/voteui24
+  path: github.com/vjscjp304/voteui24
 build:
   image: node:5.0.0-slim
   commands:
