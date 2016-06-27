@@ -5,7 +5,8 @@ var API_SERVICE_NAME = "voteapi24"
 var API_PORT = 8888
 var UI_PORT = 3000
 
-API_SERVICE_NAME = API_SERVICE_NAME.replace(/-/g, "_")
+//API_SERVICE_NAME = API_SERVICE_NAME.replace(/-/g, "_")
+
 
 var express = require('express');
 var http = require('http')
@@ -16,11 +17,14 @@ var counter = 0
 var app = express()
 app.use(serveStatic(__dirname + "/."))
 
+API_SERVICE_NAME = "HOST_"+API_SERVICE_NAME.toUpperCase();
+var host = process.env.API_SERVICE_NAME;
+
 // Endpoint 'count' - retrieve current count and store locally
 app.get('/count', function (req, res) {
 	var options = {
-		host: API_SERVICE_NAME,
-		port: API_PORT,
+		host: host,
+		//port: API_PORT,
 		path: "/data"
 	}
 	http.get(options, function(getres) {	
@@ -57,8 +61,8 @@ function updateCount(count) {
 	  Count: counter
 	})
 	var request = new http.ClientRequest({
-		hostname: API_SERVICE_NAME,
-		port: API_PORT,
+		hostname: host,
+		//port: API_PORT,
 		path: "/data",
 		method: "POST",
 		headers: {
