@@ -1,7 +1,7 @@
 // Cisco Shipped sample three-tier application UI server
 // Change the assignments below if you change the API server service name
 // or port number from the default
-var API_SERVICE_NAME = "localhost"
+var API_SERVICE_NAME = "voteapi24"
 var API_PORT = 8888
 var UI_PORT = 3000
 
