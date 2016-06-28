@@ -7,8 +7,8 @@ var serveStatic = require("serve-static");
 
 var counter = 0
 var UI_PORT = 3000
-//Getting data from env API_HOST
-var API_SERVICE_NAME = process.env.API_HOST;
+//Getting data from env HOST_VOTE_API
+var API_SERVICE_NAME = process.env.HOST_VOTE_API;
 //trim https:// or http:// 
 API_SERVICE_NAME = API_SERVICE_NAME.substring(API_SERVICE_NAME.indexOf("//")+2);
 console.log(API_SERVICE_NAME);
