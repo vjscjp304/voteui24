@@ -1,32 +1,28 @@
 // Cisco Shipped sample three-tier application UI server
 // Change the assignments below if you change the API server service name
 // or port number from the default
-var API_SERVICE_NAME = "voteapi24"
-var API_PORT = 8888
-var UI_PORT = 3000
-
-//API_SERVICE_NAME = API_SERVICE_NAME.replace(/-/g, "_")
-
-
 var express = require('express');
 var http = require('http')
 var serveStatic = require("serve-static");
 
 var counter = 0
-
+var UI_PORT = 3000
+//Getting data from env API_HOST
+var API_SERVICE_NAME = process.env.API_HOST;
+//trim https:// or http:// 
+API_SERVICE_NAME = API_SERVICE_NAME.substring(API_SERVICE_NAME.indexOf("//")+2);
+console.log(API_SERVICE_NAME);
 var app = express()
 app.use(serveStatic(__dirname + "/."))
 
-API_SERVICE_NAME = "HOST_"+API_SERVICE_NAME.toUpperCase();
-var host = process.env.API_SERVICE_NAME;
-
 // Endpoint 'count' - retrieve current count and store locally
 app.get('/count', function (req, res) {
+	
 	var options = {
-		host: host,
-		//port: API_PORT,
-		path: "/data"
-	}
+	  host: API_SERVICE_NAME,
+	  port: 80,
+	  path: '/data'
+	};
 	http.get(options, function(getres) {	
 	  getres.on("data", function(chunk) {
 	    counter = JSON.parse(chunk).Data.Count
@@ -61,8 +57,8 @@ function updateCount(count) {
 	  Count: counter
 	})
 	var request = new http.ClientRequest({
-		hostname: host,
-		//port: API_PORT,
+		hostname: API_SERVICE_NAME,
+		port: 80,
 		path: "/data",
 		method: "POST",
 		headers: {
